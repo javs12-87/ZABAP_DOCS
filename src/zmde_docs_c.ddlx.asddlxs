@@ -1,0 +1,44 @@
+@Metadata.layer: #CORE
+@UI: {
+  headerInfo: { typeName: 'Document',
+                typeNamePlural: 'Documents',
+                title: { type: #STANDARD, value: 'Objectid' } } }
+annotate view ZC_DOCS_C with
+{
+  @UI.facet: [ { id:            'Documents',
+                   purpose:       #STANDARD,
+                   type:          #IDENTIFICATION_REFERENCE,
+                   label:         'Documents',
+                   position:      10 },
+                    {
+                        id: 'Upload',
+                        purpose: #STANDARD,
+                        type: #FIELDGROUP_REFERENCE,
+                        parentId: 'GeneralInfo',
+                        label: 'Upload',
+                        position: 20,
+                        targetQualifier: 'Upload'
+                    }  ]
+  @UI: { identification: [ { position: 10, label: 'Object ID'  } ] }
+  Objectid;
+  @UI: { identification: [ { position: 20, label: 'Object Type'  } ] }
+  Objecttype;
+  @UI: { lineItem:       [ { position: 30, label: 'Document Number' } ],
+     identification: [ { position: 30, label: 'Document Number' } ] }
+  Docnum;
+  @UI: { lineItem:       [ { position: 40, label: 'Document Type' } ],
+     identification: [ { position: 40, label: 'Document Type' } ] }
+  Doctype;
+  @UI: { lineItem:       [ { position: 50, label: 'Folder ID' } ],
+     identification: [ { position: 50, label: 'Folder ID' } ] }
+  Folderid;
+  @UI.hidden: true
+  Filename;
+  @UI.hidden: true
+  Mimetype;
+  @UI:{ fieldGroup:     [ { position: 60, qualifier: 'Upload' , label: 'Attachment'} ]}
+  @UI: { lineItem:       [ { position: 60, label: 'Attachment' } ],
+     identification: [ { position: 60, label: 'Attachment' } ] }
+  Attachment;
+
+}

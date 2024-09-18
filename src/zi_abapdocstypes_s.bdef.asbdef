@@ -1,0 +1,117 @@
+managed with additional save implementation in class ZBP_I_ABAPDOCSTYPES_S unique;
+strict;
+with draft;
+
+define behavior for ZI_AbapDocsTypes_S alias AbapDocsTypesAll
+draft table ZDOC_TYPE_D_S
+with unmanaged save
+lock master total etag LastChangedAtMax
+authorization master( global )
+
+{
+  field ( readonly )
+   SingletonID;
+
+  field ( notrigger )
+   SingletonID,
+   HideTransport,
+   LastChangedAtMax;
+
+
+  update;
+  internal create;
+  internal delete;
+
+  draft action ( features : instance ) Edit;
+  draft action Activate optimized;
+  draft action Discard;
+  draft action Resume;
+  draft determine action Prepare;
+  action ( features : instance ) SelectCustomizingTransptReq parameter D_SelectCustomizingTransptReqP result [1] $self;
+
+  association _AbapDocsTypes { create ( features : instance ); with draft; }
+}
+
+define behavior for ZI_AbapDocsTypes alias AbapDocsTypes
+persistent table ZDOC_TYPE
+draft table ZDOC_TYPE_D
+etag master LocalLastChangedAt
+lock dependent by _AbapDocsTypesAll
+authorization dependent by _AbapDocsTypesAll
+
+{
+  field ( mandatory : create )
+   Objecttype;
+
+  field ( readonly )
+   SingletonID,
+   LastChangedAt,
+   LocalLastChangedAt;
+
+  field ( readonly : update )
+   Objecttype;
+
+  field ( notrigger )
+   SingletonID,
+   LastChangedAt,
+   LocalLastChangedAt;
+
+
+  update( features : global );
+  delete( features : global );
+
+  factory action ( features : instance ) CopyAbapDocsTypes parameter ZD_CopyAbapDocsTypesP [1];
+
+  mapping for ZDOC_TYPE
+  {
+    Objecttype = OBJECTTYPE;
+    LastChangedAt = LAST_CHANGED_AT;
+    LocalLastChangedAt = LOCAL_LAST_CHANGED_AT;
+  }
+
+  association _AbapDocsTypesAll { with draft; }
+  association _AbapDocsTypesText { create ( features : global ); with draft; }
+
+  validation ValidateTransportRequest on save ##NOT_ASSIGNED_TO_DETACT { create; update; delete; }
+}
+
+define behavior for ZI_AbapDocsTypesText alias AbapDocsTypesText
+persistent table ZDOC_TYPE_TXT
+draft table ZDOC_TYPE_TXT_D
+etag master LocalLastChangedAt
+lock dependent by _AbapDocsTypesAll
+authorization dependent by _AbapDocsTypesAll
+
+{
+  field ( mandatory : create )
+   Langu;
+
+  field ( readonly )
+   SingletonID,
+   Objecttype,
+   LocalLastChangedAt;
+
+  field ( readonly : update )
+   Langu;
+
+  field ( notrigger )
+   SingletonID,
+   LocalLastChangedAt;
+
+
+  update( features : global );
+  delete( features : global );
+
+  mapping for ZDOC_TYPE_TXT
+  {
+    Langu = LANGU;
+    Objecttype = OBJECTTYPE;
+    Description = DESCRIPTION;
+    LocalLastChangedAt = LOCAL_LAST_CHANGED_AT;
+  }
+
+  association _AbapDocsTypesAll { with draft; }
+  association _AbapDocsTypes { with draft; }
+
+  validation ValidateTransportRequest on save ##NOT_ASSIGNED_TO_DETACT { create; update; delete; }
+}

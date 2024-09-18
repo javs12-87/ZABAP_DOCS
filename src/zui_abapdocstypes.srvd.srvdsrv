@@ -1,0 +1,6 @@
+@ObjectModel.leadingEntity.name: 'ZC_AbapDocsTypes_S'
+define service ZUI_ABAPDOCSTYPES {
+  expose ZC_ABAPDOCSTYPES_S as AbapDocsTypesAll;
+  expose ZC_ABAPDOCSTYPES as AbapDocsTypes;
+  expose ZC_ABAPDOCSTYPESTEXT as AbapDocsTypesText;
+}

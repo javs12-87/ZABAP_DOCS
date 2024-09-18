@@ -1,0 +1,30 @@
+projection;
+strict ( 2 );
+use draft;
+
+define behavior for ZC_DOCS_P
+use etag
+{
+  use create;
+  use update;
+  use delete;
+
+  use action Edit;
+  use action Activate;
+  use action Discard;
+  use action Resume;
+  use action Prepare;
+
+  use association _docs { create; with draft;}
+
+}
+
+define behavior for ZC_DOCS_C
+use etag
+{
+ use update;
+ use delete;
+
+ use association _Parent { with draft; }
+
+}

@@ -1,0 +1,42 @@
+projection implementation in class ZBP_C_ABAPDOCSTYPES_S unique;
+strict;
+use draft;
+
+define behavior for ZC_AbapDocsTypes_S alias AbapDocsTypesAll
+
+{
+  use action Edit;
+  use action Activate;
+  use action Discard;
+  use action Resume;
+  use action Prepare;
+  use action SelectCustomizingTransptReq;
+
+  use association _AbapDocsTypes { create ( augment ); with draft; }
+}
+
+define behavior for ZC_AbapDocsTypes alias AbapDocsTypes
+
+{
+  field ( modify )
+   Description;
+
+
+  use update( augment );
+  use delete;
+
+  use action CopyAbapDocsTypes;
+
+  use association _AbapDocsTypesAll { with draft; }
+  use association _AbapDocsTypesText { create; with draft; }
+}
+
+define behavior for ZC_AbapDocsTypesText alias AbapDocsTypesText
+
+{
+  use update;
+  use delete;
+
+  use association _AbapDocsTypesAll { with draft; }
+  use association _AbapDocsTypes { with draft; }
+}

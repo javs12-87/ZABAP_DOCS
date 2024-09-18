@@ -1,0 +1,40 @@
+{
+  "formatVersion": "1",
+  "header": {
+    "description": "Maintain ABAP Docs Types",
+    "originalLanguage": "en",
+    "abapLanguageVersion": "cloudDevelopment"
+  },
+  "serviceConfiguration": {
+    "serviceBinding": "ZUI_ABAPDOCSTYPES_O4",
+    "serviceName": "ZUI_ABAPDOCSTYPES_O4",
+    "serviceVersion": "0001",
+    "rootEntitySet": "AbapDocsTypesAll",
+    "name": "ABAP Docs Types",
+    "configurationGroup": "",
+    "skipRootEntity": true
+  },
+  "appConfiguration": {
+    "listReport": {},
+    "objectPages": [
+      {
+        "entitySet": "AbapDocsTypesAll",
+        "variantManagement": "control"
+      }
+    ],
+    "tableSettings": [
+      {
+        "entitySet": "AbapDocsTypes",
+        "tableType": "gridTable",
+        "selectionMode": "single",
+        "rowCountMode": "auto",
+        "creationModeName": "creationRow"
+      },
+      {
+        "entitySet": "AbapDocsTypesText",
+        "tableType": "gridTable",
+        "creationModeName": "creationRow"
+      }
+    ]
+  }
+}

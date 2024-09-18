@@ -1,0 +1,41 @@
+@Metadata.layer: #CUSTOMER
+@UI: {
+  headerInfo: {
+    typeName: 'AbapDocsTypesText', 
+    typeNamePlural: 'AbapDocsTypesTexts', 
+    title: {
+      type: #STANDARD, 
+      label: 'ABAP Docs Types Text', 
+      value: 'Langu'
+    }
+  }
+}
+annotate view ZC_AbapDocsTypesText with
+{
+  @UI.facet: [ {
+    id: 'ZI_AbapDocsTypesText', 
+    purpose: #STANDARD, 
+    type: #IDENTIFICATION_REFERENCE, 
+    label: 'ABAP Docs Types Text', 
+    position: 1 
+  } ]
+  @UI.identification: [ {
+    position: 1 , 
+    label: 'Langu'
+  } ]
+  @UI.lineItem: [ {
+    position: 1 , 
+    label: 'Langu'
+  } ]
+  Langu;
+  
+  @UI.identification: [ {
+    position: 2 , 
+    label: 'Description'
+  } ]
+  @UI.lineItem: [ {
+    position: 2 , 
+    label: 'Description'
+  } ]
+  Description;
+}

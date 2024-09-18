@@ -1,0 +1,45 @@
+managed implementation in class zbp_i_docs_p unique;
+strict ( 2 );
+with draft;
+
+define behavior for ZI_DOCS_P //alias <alias_name>
+persistent table zdocs_p
+draft table zdocs_p_d
+lock master
+total etag Locallastchangedat
+authorization master ( instance )
+//etag master <field_name>
+{
+  field ( readonly ) Lastchangedat, Localcreatedat, Localcreatedby, Locallastchangedat, Locallastchangedby;
+  field ( readonly: update ) Objectid, Objecttype;
+
+  create;
+  update;
+  delete;
+
+  association _docs { create; with draft; }
+
+  draft action Edit;
+  draft action Activate optimized;
+  draft action Discard;
+  draft action Resume;
+
+  draft determine action Prepare;
+}
+
+define behavior for ZI_DOCS_C //alias <alias_name>
+persistent table zdocs_c
+draft table zdocs_c_d
+lock dependent by _Parent
+authorization dependent by _Parent
+//etag master <field_name>
+{
+  field ( readonly: update ) Docnum;
+  field ( readonly ) Objectid, Objecttype, Lastchangedat, Localcreatedat, Localcreatedby, Locallastchangedat, Locallastchangedby;
+
+  update;
+  delete;
+
+  association _Parent { with draft; }
+
+}

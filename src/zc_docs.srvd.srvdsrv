@@ -1,0 +1,5 @@
+@EndUserText.label: 'Documents'
+define service ZC_DOCS {
+  expose ZC_DOCS_P as Folders;
+  expose ZC_DOCS_C as Documents;
+}

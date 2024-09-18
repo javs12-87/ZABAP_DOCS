@@ -1,0 +1,5 @@
+@MappingRole: true
+define role ZI_AbapDocsTypesText {
+  grant select on ZI_AbapDocsTypesText
+  where INHERITING CONDITIONS FROM ENTITY ZI_AbapDocsTypes;
+}

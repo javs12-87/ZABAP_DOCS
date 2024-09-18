@@ -1,0 +1,38 @@
+@Metadata.layer: #CORE
+@UI: {
+  headerInfo: { typeName: 'Document',
+                typeNamePlural: 'Documents',
+                title: { type: #STANDARD, label: 'Document', value: 'Objectid' } },
+  presentationVariant: [{ sortOrder: [{ by: 'Objectid', direction:  #DESC }] }] }
+annotate view ZC_DOCS_P with
+{
+  @UI.facet: [ { id:              'Document',
+                   purpose:         #STANDARD,
+                   type:            #IDENTIFICATION_REFERENCE,
+                   label:           'Document',
+                   position:        10 },
+                 { id:              'Document',
+                   purpose:         #STANDARD,
+                   type:            #LINEITEM_REFERENCE,
+                   label:           'Documents',
+                   position:        20,
+                   targetElement:   '_docs'} ]
+
+  @UI: {  lineItem:       [ { position: 10, label: 'Object ID' } ],
+      identification: [ { position: 10, label: 'Object ID' } ],
+      selectionField: [ { position: 10 } ] }
+  Objectid;
+  @UI: {  lineItem:       [ { position: 20, label: 'Object Type' } ],
+      identification: [ { position: 20, label: 'Object Type' } ],
+      selectionField: [ { position: 20 } ] }
+  Objecttype;
+  @UI: {  lineItem:       [ { position: 30, label: 'Repository ID' } ],
+      identification: [ { position: 30, label: 'Repository ID' } ],
+      selectionField: [ { position: 30 } ] }
+  Repositoryid;
+  @UI: {  lineItem:       [ { position: 40, label: 'Folder ID' } ],
+      identification: [ { position: 40, label: 'Folder ID' } ],
+      selectionField: [ { position: 40 } ] }
+  Folderid;
+
+}

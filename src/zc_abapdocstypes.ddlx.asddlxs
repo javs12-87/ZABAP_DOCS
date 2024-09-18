@@ -1,0 +1,53 @@
+@Metadata.layer: #CUSTOMER
+@UI: {
+  headerInfo: {
+    typeName: 'AbapDocsTypes', 
+    typeNamePlural: 'AbapDocsTypess', 
+    title: {
+      type: #STANDARD, 
+      label: 'ABAP Docs Types', 
+      value: 'Objecttype'
+    }
+  }
+}
+annotate view ZC_AbapDocsTypes with
+{
+  @UI.identification: [ {
+    position: 1 
+  } ]
+  @UI.lineItem: [ {
+    position: 1 
+  }, 
+  {
+    type: #FOR_ACTION, 
+    dataAction: 'CopyAbapDocsTypes', 
+    label: 'Copy Selected Entry', 
+    invocationGrouping: #CHANGE_SET
+  } ]
+  @UI.facet: [ {
+    id: 'ZI_AbapDocsTypes', 
+    purpose: #STANDARD, 
+    type: #IDENTIFICATION_REFERENCE, 
+    label: 'ABAP Docs Types', 
+    position: 1 
+  }, 
+  {
+    id: 'ZI_AbapDocsTypesText', 
+    type: #LINEITEM_REFERENCE, 
+    label: 'ABAP Docs Types Text', 
+    position: 2 , 
+    targetElement: '_AbapDocsTypesText'
+  } ]
+  Objecttype;
+  
+  @UI.identification: [ {
+    hidden: true, 
+    position: 2 , 
+    label: 'Description'
+  } ]
+  @UI.lineItem: [ {
+    position: 2 , 
+    label: 'Description'
+  } ]
+  Description;
+}
